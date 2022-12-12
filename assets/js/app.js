@@ -10,27 +10,27 @@ chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
 	theme: "light2",
 	title: {
-		text: "Daily Sales Data"
+		text: "Variacion Mensual"
 	},
 	axisY: {
-		title: "Units",
+		title: "Valor",
 		titleFontSize: 24
 	},
 	data: [{
 		type: "column",
-		yValueFormatString: "#,### Units",
+		yValueFormatString: "#,### Pesos",
 		dataPoints: dataPoints
 	}]
 });
 
 const getMoney = async (money) => {
     try {
+        // dataPoints = [];
         const url = `https://mindicador.cl/api/${money}`;
         const response = await fetch(url);
         const arrayMoney = await response.json();
         const total = arrayMoney.serie[0].valor * cashMoney.value;
         totalBar.textContent = "El Total es: " + total;
-        console.log(arrayMoney.serie.length);
         for (var i = 0; i < arrayMoney.serie.length; i++) {
             dataPoints.push({
                 x: new Date(arrayMoney.serie[i].fecha),
