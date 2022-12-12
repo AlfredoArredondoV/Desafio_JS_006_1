@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+$font-family-base: 'Roboto', cursive;
+
+// scsss-docs-start theme-color-variables
+$primary: #0d6efd !default;
+$secondary: #6c757d !default;
+$success: #198754 !default;
+$info: #0dcaf0 !default;
+$warning: #ffc107 !default;
+$danger: #dc3545 !default;
+$light: #f8f9fa !default;
+$dark: #212529 !default;
+// scss-docs-end theme-color-variables
+
+// scss-docs-start theme.colors-map
+$theme-colors: (
+	"primary": $primary,
+	"secondary": $secondary,
+	"success": $success,
+	"info": $info,
+	"warning": $warning,
+	"danger": $danger,
+	"light": $light,
+	"dark": $dark,
+) !default;
+// scss-docs-end theme.colors-map
+
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+body {
+	margin: 70px;
+	background-color: #6c757d;
+}
+
+main {
+	margin: 10px;
+}
+
+
+
