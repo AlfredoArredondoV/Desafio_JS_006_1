@@ -27,18 +27,22 @@ const getMoney = async (money) => {
     try {
         const url = `https://mindicador.cl/api/${money}`;
         const response = await fetch(url);
-        const arrayMoney = await response.json();
-        const total = Math.trunc(cashMoney.value * arrayMoney.serie[0].valor);
-        totalBar.textContent = "El Total es: " + total;
-        for (var i = 0; i < arrayMoney.serie.length; i++) {
-            dataPoints.push({
-                x: new Date(arrayMoney.serie[i].fecha),
-                y: arrayMoney.serie[i].valor
-            });
+        if (response.status === 200) {
+            const arrayMoney = await response.json();
+            const total = Math.trunc(cashMoney.value * arrayMoney.serie[0].valor);
+            totalBar.textContent = "El Total es: " + total;
+            for (var i = 0; i < arrayMoney.serie.length; i++) {
+                dataPoints.push({
+                    x: new Date(arrayMoney.serie[i].fecha),
+                    y: arrayMoney.serie[i].valor
+                });
+            }
+            chart.render(); 
+        } else {
+            throw "err";
         }
-        chart.render(); 
-    } catch {
-        console.log(error);
+    } catch (err){
+        console.log(err);
     } 
 }
 
