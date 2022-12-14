@@ -27,7 +27,7 @@ const getMoney = async (money) => {
     try {
         const url = `https://mindicador.cl/api/${money}`;
         const response = await fetch(url);
-        if (response.status === 200) {
+        if (response.status == 200) {
             const arrayMoney = await response.json();
             const total = Math.trunc(cashMoney.value * arrayMoney.serie[0].valor);
             totalBar.textContent = "El Total es: " + total;
