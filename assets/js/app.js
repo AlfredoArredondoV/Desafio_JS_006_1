@@ -4,7 +4,7 @@ const cashMoney = document.querySelector("#cashMoney");
 const totalBar = document.querySelector("#totalBar");
 const chartContainer = document.querySelector("#chartContainer");
 var chart = null;
-var dataPoints = [];
+const dataPoints = [];
 
 chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
@@ -25,11 +25,10 @@ chart = new CanvasJS.Chart("chartContainer", {
 
 const getMoney = async (money) => {
     try {
-        // dataPoints = [];
         const url = `https://mindicador.cl/api/${money}`;
         const response = await fetch(url);
         const arrayMoney = await response.json();
-        const total = arrayMoney.serie[0].valor * cashMoney.value;
+        const total = Math.trunc(arrayMoney.serie[0].valor * cashMoney.value);
         totalBar.textContent = "El Total es: " + total;
         for (var i = 0; i < arrayMoney.serie.length; i++) {
             dataPoints.push({
@@ -43,6 +42,6 @@ const getMoney = async (money) => {
     } 
 }
 
-btnMoney.addEventListener('click', () => {
+btnMoney.addEventListener('click', () => {  
     getMoney(money.value);
 })
