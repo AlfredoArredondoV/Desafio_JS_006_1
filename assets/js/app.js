@@ -25,11 +25,13 @@ chart = new CanvasJS.Chart("chartContainer", {
 
 const getMoney = async (money) => {
     try {
+        // delete dataPoints;
         const url = `https://mindicador.cl/api/${money}`;
         const response = await fetch(url);
         if (response.status == 200) {
+            
             const arrayMoney = await response.json();
-            const total = Math.trunc(cashMoney.value * arrayMoney.serie[0].valor);
+            const total = (cashMoney.value * arrayMoney.serie[0].valor).toFixed(2);
             totalBar.textContent = "El Total es: " + total;
             for (var i = 0; i < arrayMoney.serie.length; i++) {
                 dataPoints.push({
@@ -47,5 +49,6 @@ const getMoney = async (money) => {
 }
 
 btnMoney.addEventListener('click', () => {  
+    delete dataPoints;
     getMoney(money.value);
 })
